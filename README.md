@@ -36,13 +36,22 @@ YOLOv5 include 4 different types: YOLOv5-small, YOLOv5-medium, YOLOv5-large, YOL
 * Nó bao gồm ba phần: (1) Backbone: CSPDarknet, (2) Neck: PANet và (3) Head: Lớp YOLO. Dữ liệu trước tiên được cung cấp vào CSPDarknet, nơi trích xuất các tính năng, sau đó vào PANet, nơi hợp nhất chúng. Cuối cùng, Lớp YOLO đưa ra kết quả phát hiện (lớp, điểm, vị trí, kích thước).
 YOLOv5 bao gồm 4 loại khác nhau: YOLOv5-small, YOLOv5-medium, YOLOv5-large, YOLOv5-extraLarge. Trong dự án này, chúng tôi sử dụng YOLOv5-small để đào tạo.
 
-## III. HAND SYMBOL DETECTION
+## III. HAND SYMBOL DETECTION (Nhận diện ngôn ngữ ký hiệu tay)
 * We will use a camera and OpenCV in real-time to detect the hand symbol. It is commonly assumed that videos are composed of still images known as frames. Hand symbol detection was performed in every frame of a video. To detect hand symbols, we'll utilize the YOLOv5 pre-trained model.
 * It is a real-time object detection algorithm. Because it has been trained to move quickly. Furthermore, it returns the relative accuracy. It is also intended to distinguish objects in a video or image.
 * To begin, the detection of hand symbols involves the detection of a large number of images. In this section, we will label the frames in each image. Then, pass them to the model, which will train and return results.
 * The hand symbol variable, which contains the height and width of the rectangle as well as the top-left corner coordinates enclosing the hand, can be used to generate a hand frame.
 * The method for preprocessing is the same as the method for training the model described in the second section. The following step is to draw a rectangle on top of the face and label it based on the predictions.
 * Though YOLOv5 and its variants are not as accurate. YOLOv5 performs admirably when confronted with standard-sized objects, but it is incapable of detecting small objects. When dealing with objects that appear to have rapidly changing properties, accuracy suffers significantly.
-## IV. DATA SET
+-----------------------------------------------------------------------
+* Chúng tôi sẽ sử dụng máy ảnh và OpenCV trong thời gian thực để phát hiện biểu tượng bàn tay. Người ta thường cho rằng video bao gồm các hình ảnh tĩnh được gọi là khung. Phát hiện biểu tượng bàn tay được thực hiện trong mọi khung hình của video. Để phát hiện các ký hiệu bàn tay, chúng tôi sẽ sử dụng mô hình được đào tạo trước YOLOv5.
+* Đây là thuật toán phát hiện đối tượng theo thời gian thực. Bởi vì nó đã được huấn luyện để di chuyển nhanh chóng. Hơn nữa, nó trả về độ chính xác tương đối. Nó cũng nhằm mục đích phân biệt các đối tượng trong video hoặc hình ảnh.
+* Để bắt đầu, việc phát hiện các ký hiệu bàn tay liên quan đến việc phát hiện một số lượng lớn hình ảnh. Trong phần này, chúng ta sẽ gắn nhãn cho các khung hình trong mỗi hình ảnh. Sau đó, chuyển chúng vào mô hình, mô hình này sẽ huấn luyện và trả về kết quả.
+* Biến ký hiệu bàn tay, chứa chiều cao và chiều rộng của hình chữ nhật cũng như tọa độ góc trên bên trái bao quanh bàn tay, có thể được sử dụng để tạo khung bàn tay.
+* Phương pháp tiền xử lý giống như phương pháp huấn luyện mô hình được mô tả ở phần thứ hai. Bước tiếp theo là vẽ một hình chữ nhật lên trên khuôn mặt và dán nhãn dựa trên dự đoán.
+* Mặc dù YOLOv5 và các biến thể của nó không chính xác bằng. YOLOv5 hoạt động đáng ngưỡng mộ khi đối đầu với các vật thể có kích thước tiêu chuẩn, nhưng nó không có khả năng phát hiện các vật thể nhỏ. Khi xử lý các đối tượng có đặc tính thay đổi nhanh chóng, độ chính xác bị ảnh hưởng đáng kể.
+
+## IV. DATA SET (Cài đặt dữ liệu)
 * We used images from our video to ensure that our learners could handle a variety of hand symbols. We will use a dataset of 4,1950 images cropped from video of hand symbols (including 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, A, B, C, D, E, F, G, H, and I LOVE U) to prepare for the labeling and training process. A label will be attached to each image.
+* Chúng tôi sử dụng hình ảnh từ video của mình để đảm bảo rằng người học có thể xử lý nhiều ký hiệu bàn tay khác nhau. Chúng tôi sẽ sử dụng tập dữ liệu gồm 4.1950 hình ảnh được cắt từ video về các ký hiệu bàn tay (bao gồm 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, A, B, C, D, E, F, G, H và I LOVE U) để chuẩn bị cho quá trình dán nhãn và đào tạo. Một nhãn sẽ được gắn vào mỗi hình ảnh.
 ![Picture1](https://user-images.githubusercontent.com/104005551/182420839-4c0b57b0-436d-468a-b5f5-e23c8eb901d3.png)
